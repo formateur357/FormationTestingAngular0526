@@ -1,0 +1,15 @@
+<div *ngIf="error" class="error">
+    {{ error }}
+</div>
+
+<section *ngIf="user">
+    <h1>{{ user.name }}</h1>
+
+    <p class="email">{{ user.email}}</p>
+
+    <p class="role">{{ user.role }}</p>
+
+    <button type="button" (click)="deleteUser()">
+        Supprimer
+    </button>
+</section>
