@@ -12,8 +12,8 @@ import { FormationService } from '../../services/formation';
   selector: 'app-formation-catalog',
   standalone: true,
   imports: [FormsModule, RouterLink],
-  templateUrl: './formation-catalog.component.html',
-  styleUrl: './formation-catalog.component.scss',
+  templateUrl: './formation-catalog.html',
+  styleUrl: './formation-catalog.scss',
 })
 export class FormationCatalogComponent implements OnInit {
   formations: Formation[] = [];

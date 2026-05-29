@@ -7,7 +7,7 @@ import { FormationService } from '../../services/formation';
   selector: 'app-formation-detail',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './formation-detail.component.html',
+  templateUrl: './formation-detail.html',
 })
 export class FormationDetailComponent implements OnInit {
   formation?: Formation;
