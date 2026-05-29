@@ -1,0 +1,18 @@
+<section>
+  <a routerLink="/formations">Retour aux formations</a>
+
+  <h1>Détail formation</h1>
+
+  @if (errorMessage) {
+    <p role="alert">{{ errorMessage }}</p>
+  }
+
+  @if (formation) {
+    <article>
+      <h2>{{ formation.title }}</h2>
+      <p>Catégorie : {{ formation.category }}</p>
+      <p>Niveau : {{ formation.level }}</p>
+      <p>Durée : {{ formation.duration }} heures</p>
+    </article>
+  }
+</section>

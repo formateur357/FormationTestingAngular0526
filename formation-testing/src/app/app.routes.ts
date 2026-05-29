@@ -5,6 +5,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
+import { FormationCatalogComponent } from './components/formation-catalog/formation-catalog';
+import { FormationDetailComponent } from './components/formation-detail/formation-detail';
 
 export const routes: Routes = [
   {
@@ -21,6 +23,16 @@ export const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     title: 'Dashboard',
+  },
+  {
+    path: 'formations',
+    component: FormationCatalogComponent,
+    title: 'Catalogue des formations',
+  },
+  {
+    path: 'formations/:id',
+    component: FormationDetailComponent,
+    title: 'Détail formation',
   },
   {
     path: 'users',

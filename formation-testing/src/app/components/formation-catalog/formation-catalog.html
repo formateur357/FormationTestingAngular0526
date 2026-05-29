@@ -1,0 +1,83 @@
+<section>
+  <h1>Catalogue des formations</h1>
+
+  <div class="filters">
+    <div class="form-field">
+      <label for="search">Recherche</label>
+      <input
+        id="search"
+        name="search"
+        type="search"
+        placeholder="Rechercher une formation..."
+        [(ngModel)]="search"
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="category">Catégorie</label>
+      <select
+        id="category"
+        name="category"
+        [(ngModel)]="selectedCategory"
+      >
+        <option value="">Toutes les catégories</option>
+        <option value="frontend">Frontend</option>
+        <option value="backend">Backend</option>
+        <option value="testing">Testing</option>
+      </select>
+    </div>
+
+    <div class="form-field">
+      <label for="level">Niveau</label>
+      <select
+        id="level"
+        name="level"
+        [(ngModel)]="selectedLevel"
+      >
+        <option value="">Tous les niveaux</option>
+        <option value="beginner">Débutant</option>
+        <option value="intermediate">Intermédiaire</option>
+        <option value="advanced">Avancé</option>
+      </select>
+    </div>
+  </div>
+
+  @if (loading) {
+    <p>Chargement des formations...</p>
+  }
+
+  @if (errorMessage) {
+    <p role="alert">{{ errorMessage }}</p>
+  }
+
+  @if (!loading && !errorMessage && filteredFormations.length === 0) {
+    <p>Aucune formation trouvée</p>
+  }
+
+  @if (!loading && !errorMessage && filteredFormations.length > 0) {
+    <ul aria-label="formations">
+      @for (formation of filteredFormations; track formation.id) {
+        <li data-testid="formation-item">
+          <a
+            [routerLink]="['/formations', formation.id]"
+            data-testid="formation-title"
+          >
+            {{ formation.title }}
+          </a>
+
+          <span data-testid="formation-category">
+            {{ formation.category }}
+          </span>
+
+          <span data-testid="formation-level">
+            {{ formation.level }}
+          </span>
+
+          <span data-testid="formation-duration">
+            {{ formation.duration }} heures
+          </span>
+        </li>
+      }
+    </ul>
+  }
+</section>
