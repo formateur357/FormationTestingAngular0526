@@ -1,19 +1,17 @@
-export interface User {
-  id: number;
-  name: string;
-  email: string;
-  role: 'admin' | 'user' | 'guest';
-}
-
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from '../interfaces/user';
 
-@Injectable({ providedIn: 'root' })
+export type CreateUserPayload = Omit<User, 'id'>;
+
+@Injectable({
+  providedIn: 'root',
+})
 export class UserService {
-  private apiUrl = '/api/users';
+  private readonly apiUrl = '/api/users';
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.apiUrl);
@@ -23,8 +21,11 @@ export class UserService {
     return this.http.get<User>(`${this.apiUrl}/${id}`);
   }
 
+  createUser(payload: CreateUserPayload): Observable<User> {
+    return this.http.post<User>(this.apiUrl, payload);
+  }
+
   deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
- 

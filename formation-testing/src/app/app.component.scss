@@ -1,0 +1,20 @@
+.main-nav {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.main-nav a {
+  color: #0f172a;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.main-nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  padding: 1rem;
+}

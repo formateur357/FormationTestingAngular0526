@@ -1,0 +1,45 @@
+<section class="login-page">
+  <h1>Connexion</h1>
+
+  <form (ngSubmit)="submit()" novalidate>
+    <div class="form-field">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        [(ngModel)]="email"
+        autocomplete="email"
+      />
+
+      @if (submitted && !email) {
+        <span class="error">Email requis</span>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="password">Mot de passe</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        [(ngModel)]="password"
+        autocomplete="current-password"
+      />
+
+      @if (submitted && !password) {
+        <span class="error">Mot de passe requis</span>
+      }
+    </div>
+
+    @if (errorMessage) {
+      <p role="alert" class="error-alert">{{ errorMessage }}</p>
+    }
+
+    <button type="submit">Se connecter</button>
+
+    <p>
+      <a routerLink="/login">Mot de passe oublié</a>
+    </p>
+  </form>
+</section>

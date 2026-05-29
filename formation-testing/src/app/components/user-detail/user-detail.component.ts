@@ -1,37 +1,35 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { User } from '../../interfaces/user';
-import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-user-detail',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './user-detail.html',
-  styleUrl: './user-detail.scss',
+  imports: [RouterLink],
+  templateUrl: './user-detail.component.html',
 })
-export class UserDetail implements OnInit {
-  user: User | null = null;
-  error = '';
+export class UserDetailComponent implements OnInit {
+  user?: User;
+  errorMessage = '';
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly userService: UserService
+    private readonly userService: UserService,
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.params['id']);
+    const id = Number(this.route.snapshot.paramMap.get('id'));
 
     this.userService.getUserById(id).subscribe({
       next: user => {
         this.user = user;
       },
       error: () => {
-        this.error = 'Utilisateur introuvable'
-      }
-    })
+        this.errorMessage = 'Utilisateur introuvable.';
+      },
+    });
   }
 
   deleteUser(): void {
@@ -41,11 +39,11 @@ export class UserDetail implements OnInit {
 
     this.userService.deleteUser(this.user.id).subscribe({
       next: () => {
-        this.router.navigate(['/users']);
+        void this.router.navigate(['/users']);
       },
       error: () => {
-        this.error = "Impossible de supprimer l'utilisateur";
-      }
-    })
+        this.errorMessage = 'Erreur : impossible de supprimer cet utilisateur.';
+      },
+    });
   }
 }

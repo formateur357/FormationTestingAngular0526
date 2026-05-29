@@ -1,0 +1,21 @@
+<section>
+  <a routerLink="/users">Retour aux utilisateurs</a>
+
+  <h1>Détail utilisateur</h1>
+
+  @if (errorMessage) {
+    <p role="alert">{{ errorMessage }}</p>
+  }
+
+  @if (user) {
+    <article>
+      <h2>{{ user.name }}</h2>
+      <p>{{ user.email }}</p>
+      <p>{{ user.role }}</p>
+
+      <button type="button" (click)="deleteUser()">
+        Supprimer
+      </button>
+    </article>
+  }
+</section>

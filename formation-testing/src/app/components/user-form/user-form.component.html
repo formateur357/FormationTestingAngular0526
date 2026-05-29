@@ -1,0 +1,43 @@
+<section>
+  <h1>Créer un utilisateur</h1>
+
+  <form (ngSubmit)="submit()" novalidate>
+    <div class="form-field">
+      <label for="name">Nom</label>
+      <input id="name" name="name" type="text" [(ngModel)]="user.name" />
+
+      @if (submitted && !user.name) {
+        <span class="error">Nom requis</span>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" [(ngModel)]="user.email" />
+
+      @if (submitted && !user.email) {
+        <span class="error">Email requis</span>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="role">Rôle</label>
+      <select id="role" name="role" [(ngModel)]="user.role">
+        <option value="">Choisir un rôle</option>
+        <option value="admin">admin</option>
+        <option value="user">user</option>
+        <option value="guest">guest</option>
+      </select>
+
+      @if (submitted && !user.role) {
+        <span class="error">Rôle requis</span>
+      }
+    </div>
+
+    @if (errorMessage) {
+      <p role="alert">{{ errorMessage }}</p>
+    }
+
+    <button type="submit">Créer</button>
+  </form>
+</section>

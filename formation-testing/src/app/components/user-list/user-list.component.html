@@ -1,0 +1,47 @@
+<section>
+  <header class="page-header">
+    <h1>Utilisateurs</h1>
+
+    <a routerLink="/users/new" role="button">Créer</a>
+  </header>
+
+  <label for="search">Recherche</label>
+  <input
+    id="search"
+    name="search"
+    type="search"
+    placeholder="Rechercher..."
+    [(ngModel)]="search"
+  />
+
+  @if (loading) {
+    <p>Chargement...</p>
+  }
+
+  @if (errorMessage) {
+    <p role="alert">{{ errorMessage }}</p>
+  }
+
+  @if (!loading && !errorMessage && filteredUsers.length === 0) {
+    <p>Aucun utilisateur</p>
+  }
+
+  @if (!loading && !errorMessage && filteredUsers.length > 0) {
+    <ul aria-label="utilisateurs">
+      @for (user of filteredUsers; track user.id) {
+        <li data-testid="user-item">
+          <a [routerLink]="['/users', user.id]" data-testid="user-name">
+            {{ user.name }}
+          </a>
+
+          <span>{{ user.email }}</span>
+          <span>{{ user.role }}</span>
+
+          <button type="button" (click)="deleteUser(user.id)">
+            Supprimer
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</section>
